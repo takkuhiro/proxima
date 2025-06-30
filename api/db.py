@@ -47,14 +47,27 @@ def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
     return pool
 
 
-def execute_sql_with_params(sql: str, params: dict) -> tuple[list[Any], bool]:
+def execute_sql_with_params(sql: str, params: dict | list[dict]) -> tuple[list[Any], bool]:
     """
     SQLを実行する関数
     """
     pool = connect_tcp_socket()
+    results = []
     try:
-        with pool.connect() as conn:
-            results = conn.execute(sqlalchemy.text(sql), parameters=params).fetchall()
+        if sql.strip().upper().startswith('SELECT'):
+            with pool.connect() as conn:
+                result = conn.execute(sqlalchemy.text(sql), parameters=params)
+                results = result.fetchall()
+        else:
+            if isinstance(params, list):
+                with pool.connect() as conn:
+                    for param in params:
+                        conn.execute(sqlalchemy.text(sql), parameters=param)
+                    conn.commit()
+            else:
+                with pool.connect() as conn:
+                    conn.execute(sqlalchemy.text(sql), parameters=params)
+                    conn.commit()
     except Exception as e:
         logger.error(f"Error executing SQL: {e}")
         return [], False
