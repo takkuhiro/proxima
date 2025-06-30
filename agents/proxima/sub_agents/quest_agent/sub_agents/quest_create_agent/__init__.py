@@ -1,0 +1,1 @@
+from .agent import quest_create_agent

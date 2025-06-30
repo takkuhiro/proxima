@@ -1,0 +1,65 @@
+[project]
+name = "api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cloud-sql-python-connector>=1.18.2",
+    "cloudevents>=1.11.0",
+    "fastapi>=0.115.12",
+    "google-adk>=1.4.2",
+    "google-api-python-client>=2.169.0",
+    "google-cloud-aiplatform>=1.93.0",
+    "google-cloud-bigquery>=3.32.0",
+    "google-cloud-firestore>=2.20.2",
+    "google-genai>=1.15.0",
+    "gunicorn>=23.0.0",
+    "mypy>=1.15.0",
+    "pandas>=2.3.0",
+    "pg8000>=1.31.2",
+    "ruff>=0.11.10",
+    "types-requests>=2.32.4.20250611",
+    "ulid>=1.1",
+    "uvicorn>=0.34.2",
+]
+
+[tool.mypy]
+ignore_missing_imports = true
+disallow_untyped_defs = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 127
+indent-width = 4
+exclude = [
+    "*/__init__.py",
+    ".git",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv/*",
+    "local/*",
+]
+
+[tool.ruff.lint]
+ignore = ["B008"]
+select = [
+    "B",
+    "E",
+    "F",
+    "I",
+    "UP",
+    "W",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pylint]
+max-args = 10
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "ruff>=0.11.10",
+]

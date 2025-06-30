@@ -1,0 +1,72 @@
+[project]
+name = "agents"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.13.4",
+    "google-api-python-client>=2.168.0",
+    "google-cloud-aiplatform[adk,agent-engines]>=1.90.0",
+    "python-dotenv>=1.1.0",
+    "requests>=2.32.3",
+    "toolbox-core>=0.2.0",
+    "toolbox>=1.11.0",
+    "types-requests>=2.32.0.20250515",
+    "uvicorn>=0.34.2",
+    "vertexai>=1.43.0",
+    "cloudpickle>=3.1.1",
+    "cloud-sql-python-connector>=1.18.2",
+    "pg8000>=1.31.2",
+    "ulid>=1.1",
+    "google-adk[eval]==1.4.2",
+    "google-auth>=2.39.0",
+]
+
+[tool.mypy]
+ignore_missing_imports = true
+disallow_untyped_defs = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 127
+indent-width = 4
+exclude = [
+    "*/__init__.py",
+    ".git",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv/*",
+    "local/*",
+    "*/prompt.py",
+]
+
+[tool.ruff.lint]
+ignore = ["B008"]
+select = [
+    "B",
+    "E",
+    "F",
+    "I",
+    "UP",
+    "W",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pylint]
+max-args = 10
+
+[dependency-groups]
+dev = [
+    "anyio>=4.9.0",
+    "mypy>=1.15.0",
+    "pytest>=8.4.1",
+    "pytest-asyncio>=1.0.0",
+    "pytest-tornasync>=0.6.0.post2",
+    "pytest-trio>=0.8.0",
+    "pytest-twisted>=1.14.3",
+    "ruff>=0.11.11",
+    "twisted>=25.5.0",
+]

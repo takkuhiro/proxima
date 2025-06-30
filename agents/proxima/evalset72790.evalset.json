@@ -1,0 +1,299 @@
+{
+  "eval_set_id": "evalset72790",
+  "name": "evalset72790",
+  "description": null,
+  "eval_cases": [
+    {
+      "eval_id": "casea580cc",
+      "conversation": [
+        {
+          "invocation_id": "e-eb124dae-d42b-4702-9a5c-0dd6d8d21082",
+          "user_content": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "thought_signature": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "hi"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "thought_signature": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "美咲だよ！\nマスター、こんにちは！"
+              }
+            ],
+            "role": null
+          },
+          "intermediate_data": {
+            "tool_uses": [],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1750769284.488623
+        }
+      ],
+      "session_input": {
+        "app_name": "proxima",
+        "user_id": "user",
+        "state": {}
+      },
+      "creation_timestamp": 1750769517.176167
+    },
+    {
+      "eval_id": "casea31031",
+      "conversation": [
+        {
+          "invocation_id": "e-77174bc1-99ce-4c40-b04c-138dbc4c3b1b",
+          "user_content": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "thought_signature": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "キャリア相談をしてもいいかな"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "thought_signature": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "麗華よ。\nええ、もちろんよ。\nマスターのキャリアについて、一緒に考えさせてちょうだい。\nどんなことについて話したいかしら？"
+              }
+            ],
+            "role": null
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "id": "adk-1270c1df-63f0-4c62-a30e-73278595f30b",
+                "args": {
+                  "agent_name": "career_agent"
+                },
+                "name": "transfer_to_agent"
+              }
+            ],
+            "intermediate_responses": []
+          },
+          "creation_timestamp": 1750769665.382804
+        }
+      ],
+      "session_input": {
+        "app_name": "proxima",
+        "user_id": "user",
+        "state": {}
+      },
+      "creation_timestamp": 1750769706.746228
+    },
+    {
+      "eval_id": "case7bd837",
+      "conversation": [
+        {
+          "invocation_id": "e-a60e2aab-3433-4f22-8281-d7ee98b1f53c",
+          "user_content": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "thought_signature": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "クエスト変えたいな"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "thought_signature": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "ごめんなさい、マスター。\n今のクエストが何だったか、教えてもらえる？"
+              },
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "thought_signature": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "<INFO>\nThe user wants to change the daily quest.\nThe current quest is \"10分間かけて技術記事を読んで、その内容を3行でまとめてみましょう。\".\n</INFO>\n楓です。\nマスター、今のクエストを変えたいのね。\n何か難しいところでもあった？\n今のクエストは「10分間かけて技術記事を読んで、その内容を3行でまとめてみましょう。」だったわね。\nこのクエストのどこが難しいと感じたか、教えてくれる？"
+              }
+            ],
+            "role": null
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "id": "adk-6c3db24f-73b6-4b0f-94c1-6120b12c672f",
+                "args": {
+                  "agent_name": "quest_agent"
+                },
+                "name": "transfer_to_agent"
+              },
+              {
+                "id": "adk-9d1b1c0e-522b-4f17-9e68-1ea195830fba",
+                "args": {
+                  "user_id": "proxima_user"
+                },
+                "name": "search_tasks"
+              }
+            ],
+            "intermediate_responses": [
+              [
+                "quest_agent",
+                [
+                  {
+                    "video_metadata": null,
+                    "thought": null,
+                    "inline_data": null,
+                    "file_data": null,
+                    "thought_signature": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "text": "楓です。\nマスター、今のクエストを変えたいのね。\n何か難しいところでもあった？"
+                  }
+                ]
+              ]
+            ]
+          },
+          "creation_timestamp": 1750769724.97542
+        }
+      ],
+      "session_input": {
+        "app_name": "proxima",
+        "user_id": "user",
+        "state": {}
+      },
+      "creation_timestamp": 1750769757.548357
+    },
+    {
+      "eval_id": "caseb611b3",
+      "conversation": [
+        {
+          "invocation_id": "e-f3d7a244-7dc7-49b5-8bb7-085adb368b5e",
+          "user_content": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "thought_signature": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "2025年の夏祭りで有名どころを教えて"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "video_metadata": null,
+                "thought": null,
+                "inline_data": null,
+                "file_data": null,
+                "thought_signature": null,
+                "code_execution_result": null,
+                "executable_code": null,
+                "function_call": null,
+                "function_response": null,
+                "text": "2025年の夏祭りで有名どころについて調べてみたよ！\n\n花火大会だと「東京競馬場花火」や「海洋博美ら海花火大会」なんかがもう予定されているみたい！\nもっと詳しく知りたい場合はここを見てみてね！\n参考：開催予定の花火大会【全国】 - 花火大会2025 - ウォーカープラス\nhttps://hanabi.walkerplus.com/list/scheduled/\n\nお祭りだとね、東北三大祭りの「青森ねぶた祭」、「仙台七夕まつり」、「秋田竿灯まつり」は毎年すごく盛り上がるみたいだよ！\nあと、京都の「祇園祭」や大阪の「天神祭」、徳島の「阿波おどり」なんかもすごく有名だね！\n参考：【2025年7/8/9月開催】日本のオススメ夏祭り10選！ - 日本の観光 ...\nhttps://att-japan.net/ja/3-2/\n\nどのお祭りもとっても魅力的だね！"
+              }
+            ],
+            "role": null
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "id": "adk-6fb6ae27-78cd-4051-9256-df9fc6b27460",
+                "args": {
+                  "query": "2025年 夏祭り 有名"
+                },
+                "name": "google_search"
+              }
+            ],
+            "intermediate_responses": [
+              [
+                "proxima_agent",
+                [
+                  {
+                    "video_metadata": null,
+                    "thought": null,
+                    "inline_data": null,
+                    "file_data": null,
+                    "thought_signature": null,
+                    "code_execution_result": null,
+                    "executable_code": null,
+                    "function_call": null,
+                    "function_response": null,
+                    "text": "美咲だよ！\n\n2025年の夏祭りで有名どころだね！\nちょっと調べてみるね！\n"
+                  }
+                ]
+              ]
+            ]
+          },
+          "creation_timestamp": 1750770594.639375
+        }
+      ],
+      "session_input": {
+        "app_name": "proxima",
+        "user_id": "user",
+        "state": {}
+      },
+      "creation_timestamp": 1750770608.539826
+    }
+  ],
+  "creation_timestamp": 1750769508.6097212
+}

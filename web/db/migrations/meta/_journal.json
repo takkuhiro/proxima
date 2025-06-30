@@ -1,0 +1,13 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1745310910565,
+      "tag": "0000_silky_grey_gargoyle",
+      "breakpoints": true
+    }
+  ]
+}

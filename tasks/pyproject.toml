@@ -1,0 +1,72 @@
+[project]
+name = "tasks"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "functions-framework",
+    "requests",
+    "psycopg2-binary",
+    "python-dotenv>=1.1.0",
+    "google-api-python-client>=2.170.0",
+    "google-genai>=1.17.0",
+    "pydantic>=2.11.5",
+    "beautifulsoup4>=4.13.4",
+    "cloud-sql-python-connector>=1.18.2",
+    "sqlalchemy>=2.0.41",
+    "pg8000>=1.31.2",
+    "ulid>=1.1",
+    "types-requests>=2.32.0.20250515",
+    "flask>=3.1.1",
+    "google-cloud-firestore>=2.21.0",
+    "google-cloud-storage>=3.1.1",
+    "pytz>=2025.2",
+    "google-auth>=2.40.2",
+]
+
+
+[tool.mypy]
+ignore_missing_imports = true
+disallow_untyped_defs = true
+
+[tool.ruff]
+target-version = "py311"
+line-length = 127
+indent-width = 4
+exclude = [
+    "*/__init__.py",
+    ".git",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv/*",
+    "local/*",
+    "*/prompt.py",
+    "*/instruction.py",
+    "*/characters.py",
+    "*/db.py",
+    "trash",
+]
+
+[tool.ruff.lint]
+ignore = ["B008"]
+select = [
+    "B",
+    "E",
+    "F",
+    "I",
+    "UP",
+    "W",
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.pylint]
+max-args = 10
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "ruff>=0.11.11",
+]

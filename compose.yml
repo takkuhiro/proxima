@@ -1,0 +1,27 @@
+services:
+  cloud-sql-proxy:
+    image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.14.0
+    volumes:
+      - ~/.config/gcloud/application_default_credentials.json:/config/key.json
+    command:
+      - "--credentials-file=/config/key.json"
+      - "--address=0.0.0.0"
+      - "--port=3307"
+      - "PROJECT_ID=:asia-northeast1:demo-app"
+    ports:
+      - "3307:3307"
+    environment:
+      GOOGLE_APPLICATION_CREDENTIALS: /config/key.json
+
+  mysql:
+    image: mysql:8.0
+    command: [--default-authentication-plugin=mysql_native_password, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --innodb_file_per_table=true]
+    restart: always
+    volumes:
+      - ./local/mysql:/var/lib/mysql
+      - ./local/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: demo_app
+    ports:
+      - "3306:3306"

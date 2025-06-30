@@ -1,0 +1,162 @@
+sources:
+  my-cloud-sql-source:
+    kind: cloud-sql-postgres
+    project: PROJECT
+    region: REGION
+    instance: INSTANCE
+    database: DATABASE
+    user: USER
+    password: PASSWORD
+
+tools:
+  search-memory:
+    kind: postgres-sql
+    source: my-cloud-sql-source
+    description: "指定されたuser_idに紐づく全てのmemory(記憶)を検索します。ユーザーの情報が必要な場合はこれを実行してください"
+    parameters:
+      - name: user_id
+        type: string
+        description: "memoryを検索するユーザーのID"
+    statement: SELECT * FROM memory WHERE user_id = $1;
+
+  add-task:
+    kind: postgres-sql
+    source: my-cloud-sql-source
+    description: "新しいタスク(=デイリークエスト)を追加します。idとcreated_atは自動で生成され、completedはデフォルトでfalseに設定されます。user_id, title, description, recommend, category, estimated_timeを指定する必要があります。"
+    parameters:
+      - name: user_id
+        type: string
+        description: "タスクを追加するユーザーのID"
+      - name: title
+        type: string
+        description: "タスクのタイトル"
+      - name: description
+        type: string
+        description: "タスクの詳細な説明"
+      - name: recommend
+        type: string
+        description: "ユーザーのキャリアから考えた、このタスクを推奨する理由"
+      - name: category
+        type: string
+        description: "タスクのカテゴリを次の中から選択（学習, 開発, 調査, SNS, OSS, ブログ, イベント, 趣味, その他）"
+      - name: estimated_time
+        type: string
+        description: "タスクの完了にかかる推定時間を次の中から選択する（5分, 10分, 15分, 30分, 1時間, 1時間以上）"
+    statement: INSERT INTO tasks (id, user_id, title, description, recommend, category, completed, estimated_time, created_at) VALUES (gen_random_uuid()::text, $1, $2, $3, $4, $5, false, $6, NOW());
+
+  search-task:
+    kind: postgres-sql
+    source: my-cloud-sql-source
+    description: "指定されたuser_idに紐づく全てのタスク(=デイリークエスト)を検索します。"
+    parameters:
+      - name: user_id
+        type: string
+        description: "タスクを検索するユーザーのID"
+    statement: SELECT * FROM tasks WHERE user_id = $1;
+
+  delete-task:
+    kind: postgres-sql
+    source: my-cloud-sql-source
+    description: "指定されたIDのタスクを削除します。"
+    parameters:
+      - name: id
+        type: string
+        description: "削除するタスクのID"
+    statement: DELETE FROM tasks WHERE id = $1;
+
+  update-task:
+    kind: postgres-sql
+    source: my-cloud-sql-source
+    description: "指定されたIDのタスク(=デイリークエスト)を更新します。"
+    parameters:
+      - name: id
+        type: string
+        description: "更新するタスクのID"
+      - name: title
+        type: string
+        description: "タスクの新しいタイトル"
+      - name: description
+        type: string
+        description: "タスクの新しい説明"
+      - name: recommend
+        type: string
+        description: "ユーザーのキャリアから考えた、このタスクを推奨する理由"
+      - name: category
+        type: string
+        description: "タスクのカテゴリを次の中から選択（学習, 開発, 調査, SNS, OSS, ブログ, イベント, 趣味, その他）"
+      - name: completed
+        type: string
+        description: "タスクの完了状態（true/false）"
+      - name: estimated_time
+        type: string
+        description: "タスクの完了にかかる推定時間を次の中から選択する（5分, 10分, 15分, 30分, 1時間, 1時間以上）"
+    statement: UPDATE tasks SET title = $2, description = $3, recommend = $4, category = $5, completed = $6::boolean, estimated_time = $7 WHERE id = $1;
+
+  add-memory:
+    kind: postgres-sql
+    source: my-cloud-sql-source
+    description: "新しいmemoryを追加します。id, created_at, updated_atは自動で生成されます。"
+    parameters:
+      - name: user_id
+        type: string
+        description: "memoryを追加するユーザーのID"
+      - name: category
+        type: string
+        description: "memoryのカテゴリ"
+      - name: content
+        type: string
+        description: "memoryの内容"
+    statement: INSERT INTO memory (id, user_id, category, content, created_at, updated_at) VALUES (gen_random_uuid()::text, $1, $2, $3, NOW(), NOW());
+
+  update-memory:
+    kind: postgres-sql
+    source: my-cloud-sql-source
+    description: "指定されたIDのmemoryを更新します。"
+    parameters:
+      - name: id
+        type: string
+        description: "更新するmemoryのID"
+      - name: category
+        type: string
+        description: "memoryの新しいカテゴリ"
+      - name: content
+        type: string
+        description: "memoryの新しい内容"
+    statement: UPDATE memory SET category = $2, content = $3, updated_at = NOW() WHERE id = $1;
+
+  search-career:
+    kind: postgres-sql
+    source: my-cloud-sql-source
+    description: "指定されたuser_idに紐づく全てのキャリア目標を検索します。"
+    parameters:
+      - name: user_id
+        type: string
+        description: "キャリア目標を検索するユーザーのID"
+    statement: SELECT * FROM career_goals WHERE user_id = $1 AND deleted = false;
+
+  search-initiative:
+    kind: postgres-sql
+    source: my-cloud-sql-source
+    description: "指定されたuser_idに紐づく全てのプラン(イニシアチブ)を検索します。"
+    parameters:
+      - name: user_id
+        type: string
+        description: "プラン(イニシアチブ)を検索するユーザーのID"
+    statement: SELECT * FROM initiatives WHERE user_id = $1 AND deleted = false;
+
+toolsets:
+  memory-toolset:
+    - search-memory
+    - search-career
+    - search-initiative
+    - search-task
+    - add-memory
+    - update-memory
+  task-toolset:
+    - search-memory
+    - search-career
+    - search-initiative
+    - search-task
+    - add-task
+    - delete-task
+    - update-task
