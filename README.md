@@ -1,8 +1,8 @@
-![Proxima](https://github.com/user-attachments/assets/7b2f0a81-c4f3-49d3-9f19-c58cf22de052)
+![Proxima](web/public/proxima_logo_16by9.jpeg)
 
 # Proxima へようこそ 👋
 
-Proxima は **「一緒に強くなる！エンジニアの側で支える一生涯のバディ」** をコンセプトにした AI エージェント & ラーニングプラットフォームです。  
+Proxima は **「一緒に強くなる！エンジニアの側で支える一生涯のバディ」** をコンセプトにした AI エージェント & ラーニングプラットフォームです。
 チャット、キャリアプランニング、デイリークエスト、情報収集など多彩な機能でエンジニアの成長を支援します。
 
 ![Architecture](assets/ProximaArchitecture.png)
@@ -81,7 +81,7 @@ uvicorn api.main:app --reload --port 8080  # http://localhost:8080
 
 ## デプロイ
 
-Cloud Run へデプロイする手順は `agents/README.md` と `api/README.md` にまとまっています。  
+Cloud Run へデプロイする手順は `agents/README.md` と `api/README.md` にまとまっています。
 概要は以下の流れです。
 
 1. Docker イメージをビルド & Push
