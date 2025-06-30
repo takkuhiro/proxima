@@ -52,18 +52,22 @@ def execute_sql_with_params(sql: str, params: dict | list[dict]) -> tuple[list[A
     SQLを実行する関数
     """
     pool = connect_tcp_socket()
-    logger.info(f"Executing SQL: {sql}")
-    logger.info(f"Params: {params}")
+    results = []
     try:
-        with pool.connect() as conn:
-            result = conn.execute(sqlalchemy.text(sql), parameters=params)
-
-            # SELECTクエリの場合のみfetchallを実行
-            if sql.strip().upper().startswith('SELECT'):
+        if sql.strip().upper().startswith('SELECT'):
+            with pool.connect() as conn:
+                result = conn.execute(sqlalchemy.text(sql), parameters=params)
                 results = result.fetchall()
+        else:
+            if isinstance(params, list):
+                with pool.connect() as conn:
+                    for param in params:
+                        conn.execute(sqlalchemy.text(sql), parameters=param)
+                    conn.commit()
             else:
-                # INSERT/UPDATE/DELETEの場合は空のリストを返す
-                results = []
+                with pool.connect() as conn:
+                    conn.execute(sqlalchemy.text(sql), parameters=params)
+                    conn.commit()
     except Exception as e:
         logger.error(f"Error executing SQL: {e}")
         return [], False
